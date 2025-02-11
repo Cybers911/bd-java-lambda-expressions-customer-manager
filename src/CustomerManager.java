@@ -27,8 +27,25 @@ public class CustomerManager {
         DatabaseManager databaseManager = new DatabaseManager();
         // TODO Get Customers from DatabaseManager using the method getCustomers
 
-        // TODO Use List's forEach() method with a lambda expression to check the status for each customer,
+        // TODO Use List's forEach() method with a lambda expression
+        //  to check the status for each customer,
         //  emailing each customer who has not accepted the new terms.
+        
+        
+        //Retrieve the list of customers from the DatabaseManager
+        List<String> customers = databaseManager.getCustomers();
+        
+        //Use the forEach with lambda if customers accept terms
+
+        customers.forEach(customer -> {
+            if (!databaseManager.checkCustomer(customer)) {
+                databaseManager.emailCustomer(customer);
+            }
+        });
+
+        
+
+    //return the list of emailed customers
 
         return databaseManager.getEmailedCustomers();
     }
